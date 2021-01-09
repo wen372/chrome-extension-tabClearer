@@ -1,0 +1,19 @@
+body {
+    width:200px;
+    height:140px;
+ }
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    height: 50px;
+  }
+
+.item{
+    flex: auto;
+
+}
+.footer{
+    font-size: 15px;
+}
