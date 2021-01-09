@@ -2,16 +2,19 @@ document.addEventListener('DOMContentLoaded', function() {
     var clearTabsButton = document.getElementById('clearTabs');
     clearTabsButton.addEventListener('click', function() {
       //alert("Hello from your Chrome extension!");
-      chrome.tabs.query({"currentWindow":true}, function(tabs) {
-          for (i=0; i<tabs.length; i++){
-            //checks if id is locked and removes if it is
-            chrome.storage.local.get(tabs[i].id,function(result){
-              
+      chrome.tabs.query({}, function(tabs) {
+        var tabIds = [];
+        tabs.forEach(element => tabIds.push(element.id.toString()));
+        chrome.storage.local.get(tabIds,function(result){
+            var removeArr = []
+            tabIds.forEach(element => {
+            if(result[element] == undefined){
+                removeArr.push(parseInt(element));
+            }
             });
-
-
-            chrome.tabs.remove(tabs[i].id,function(){});
-          }
+            chrome.tabs.remove(removeArr,function(){});
+        });
+        
       });
     }, false);
   }, false);
@@ -19,33 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
 //eventlistener for locktab button
 document.addEventListener('DOMContentLoaded', function() {
 
-  chrome.storage.local.set({titus:"is awesome"},function(){
-
-  });
-
   var lockTabButton = document.getElementById('lockTab');
   lockTabButton.addEventListener('click', function() {
-  
-
   chrome.tabs.getSelected(null, function(tab) {
     var currentTabId = tab.id.toString();
     chrome.storage.local.get(currentTabId,function(result){
         result[currentTabId] == undefined ? lock() : unlock();
-        //result.currentTabId == undefined ? lock() : unlock();
-        alert(currentTabId);
     });
   });
 
-
-
   }, false);
 }, false);
-
-//checks if current tab is in storage
-function isLocked(){
-
-  alert(x);
-}
 
 //"locks" current tab by saving in storage
 function lock(){
