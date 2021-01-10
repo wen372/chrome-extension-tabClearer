@@ -1,3 +1,4 @@
+//eventlistener for clearTabs button
 document.addEventListener('DOMContentLoaded', function() {
     var clearTabsButton = document.getElementById('clearTabs');
     clearTabsButton.addEventListener('click', function() {
@@ -29,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.local.get(currentTabId,function(result){
         result[currentTabId] == undefined ? lock() : unlock();
     });
+    //Trying to close window after clicking button but it messes with the above code 
+    //window.close();
   });
-
   }, false);
 }, false);
 
@@ -41,9 +43,10 @@ function lock(){
     var dictionary = {};
     dictionary[currentId] = 0;
     chrome.storage.local.set(dictionary,function(){});
-    alert("locked tab");
+    chrome.browserAction.setIcon({tabId: tab.id, path: 'images/locked.png'});
   });
 }
+
 
 
 //"unlocks" current tab by removing from storage
@@ -51,6 +54,6 @@ function unlock(){
   chrome.tabs.getSelected(null, function(tab) {
     var currentId = tab.id.toString();
     chrome.storage.local.remove(currentId,function(){});
-    alert("unlocked tab");
+    chrome.browserAction.setIcon({tabId: tab.id, path: 'images/unlocked.png'});
   });
 }
