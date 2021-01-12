@@ -4,7 +4,23 @@
     "name": "tabClearer plugin",
     "description": "This extension clears non locked tabs on click",
     "version": "1.0",
-  
+
+    "commands": {
+        "clear-unlocked-tabs": {
+          "suggested_key": {
+            "default": "Alt+A"
+          }, 
+        "description": "Clear all unlocked tabs."
+        },
+
+        "toggle-lock-selected-tab": {
+            "suggested_key": {
+              "default": "Alt+L"
+            }, 
+          "description": "Lock/unlock selected tab."
+          }
+    },
+
     "browser_action": {
      "default_icon": "images/unlocked.png",
      "default_popup": "popup.html"
