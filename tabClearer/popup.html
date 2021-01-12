@@ -1,19 +1,45 @@
 <!doctype html>
 <html>
-  <head>
-    <title>tabClearer</title>
-    <script src="popup.js"></script>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <h1 style="text-align: center;";>tabClearer</h1>
-    <div class="box">
-    <button id="clearTabs", class="item">ClearTabs</button>
-    <button id="lockTab", class="item">Lock Tab</button>
+
+<head>
+  <title>tabClearer</title>
+  <script src="popup.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class=popup>
+
+    <div class=lockedPageViewHidden>
+      <div class=scrollArea>
+        <form>
+        <select id=scrollSelect , size="5">
+          <!-- <option value="1">Item #1</option> -->
+        </select>
+        </form>
+      </div>
     </div>
-    <div class = footer>
-    <p>Created By: Titus & Julio 
+
+    
+    <div class=mainView>
+      <h1 style="text-align: center;" ;>tabClearer</h1>
+
+      <div class="mainButtons">
+        <button id="clearTabs" , class="item">ClearTabs</button>
+        <button id="lockTab" , class="item">Lock Tab</button>
+      </div>
+
+      <div class=footer>
+        <div class=expandButton>
+          <button id="lockedPageViewButton"> < </button>
+        </div>
+        <div class=about>
+          <p>Created By: Titus & Julio
+        </div>
+      </div>
     </div>
-    </p>
-  </body>
+  </div>
+  </p>
+</body>
+
 </html>

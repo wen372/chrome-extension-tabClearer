@@ -12,3 +12,13 @@ chrome.runtime.onMessage.addListener(function(msg)
       });
     }
 });
+
+//listens for tab closing and checks if tab is in locked storage and deletes it from storage if it is
+chrome.tabs.onRemoved.addListener(function(tabid) {
+    var currentTabId = tabid.toString();
+    chrome.storage.local.get(currentTabId,function(result){
+        if (result[currentTabId] != undefined){
+            chrome.storage.local.remove(currentTabId, function () { });
+        } 
+    });
+});
