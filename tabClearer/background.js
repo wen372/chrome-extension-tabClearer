@@ -69,3 +69,12 @@ function toggleSelectedTabLock() {
         });
     });
 }
+
+// Handler for lock keyboard shortcut
+chrome.commands.onCommand.addListener(function(command) {
+    if (command == "toggle-lock-selected-tab") {
+        toggleSelectedTabLock();
+    } else if (command == "clear-unlocked-tabs") {
+        clearUnlockedTabs();
+    }
+  });
