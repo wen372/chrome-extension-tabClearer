@@ -60,7 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
           if (Number.isInteger(parseInt(key))) {
             chrome.tabs.get(parseInt(key), function (tab) {
               var option = document.createElement("option");
-              option.text = tab.title;
+              option.text = tab.url;
+              option.value = tab.id;
               //sends new title to scrollSelect html
               scrollSelect.add(option);
             });
@@ -86,6 +87,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
+
+  /* Event listener to change the elements within the expanded view */
+  document.getElementById("scrollSelect").addEventListener("click", function(e) {
+    // e.target will be the item that was clicked on
+    var tabId = parseInt(e.target.value);
+    chrome.tabs.update(tabId, {selected: true}, function(){});
+  })
 }, false);
 
 
@@ -102,7 +110,6 @@ function lock() {
     chrome.browserAction.setIcon({ tabId: tab.id, path: 'images/locked.png' });
   });
 }
-
 
 
 //"unlocks" current tab by removing from storage
