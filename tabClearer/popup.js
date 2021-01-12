@@ -46,11 +46,16 @@ document.addEventListener('DOMContentLoaded', function () {
           //*** fix this line to check if the tabID we get is actually still active
           if (Number.isInteger(parseInt(key))) {
             chrome.tabs.get(parseInt(key), function (tab) {
-              var option = document.createElement("option");
-              option.text = tab.url;
-              option.value = tab.id;
-              //sends new title to scrollSelect html
-              scrollSelect.add(option);
+              chrome.windows.getCurrent(function (window) {
+                var option = document.createElement("option");
+                option.text = tab.url;
+                option.value = tab.id;
+                /* This is to distinguish to users the locked tabs in the current window */
+                if (window.id == tab.windowId) {
+                  option.style.backgroundColor = "lightgreen";
+                }
+                scrollSelect.add(option);
+              });  
             });
           }
         })
