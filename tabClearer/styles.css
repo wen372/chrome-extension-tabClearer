@@ -1,9 +1,9 @@
 body {
     width:200px;
-    height:140px;
+    height:130px;
  }
 
-.box {
+.mainButtons {
     display: flex;
     justify-content: space-between;
     width: 200px;
@@ -15,5 +15,55 @@ body {
 
 }
 .footer{
+    display:flex;
+    
+    text-align: right;
+}
+.expandButton{
+    flex:auto;
+    padding-top:13px;
+    width: 10px;
+    height: 20px;
+}
+.about{
     font-size: 15px;
+    flex:auto;
+}
+
+.lockedPageViewHidden{
+    display: none;
+}
+
+.lockedPageView{
+    display: block;
+    width:200px;
+    height:130px;
+}
+.popup{
+    display:flex;
+}
+.scrollArea select{
+    width:180px;
+    height:150px;
+    overflow: scroll;
+}
+/* width */
+.scrollArea select::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+/* Track */
+.scrollArea select::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+   
+/* Handle */
+.scrollArea select::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  
+/* Handle on hover */
+.scrollArea select::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
