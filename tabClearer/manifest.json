@@ -2,7 +2,7 @@
     "manifest_version": 2,
   
     "name": "tabClearer plugin",
-    "description": "This extension clears non locked tabs on click",
+    "description": "This extension can lock specific tabs and clears non locked tabs on click",
     "version": "1.0",
 
     "commands": {
