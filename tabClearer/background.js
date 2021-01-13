@@ -13,6 +13,7 @@ chrome.runtime.onMessage.addListener(function(msg)
     }
 });
 
+
 //listens for tab closing and checks if tab is in locked storage and deletes it from storage if it is
 chrome.tabs.onRemoved.addListener(function(tabid) {
     var currentTabId = tabid.toString();
@@ -21,6 +22,18 @@ chrome.tabs.onRemoved.addListener(function(tabid) {
             chrome.storage.local.remove(currentTabId, function () { });
         } 
     });
+});
+
+//listens for update and re-enables the icons for locked tabs
+chrome.runtime.onInstalled.addListener(function(details){
+    if(details.reason == "update"){
+        chrome.storage.local.get(null, function (items) {
+            var allKeys = Object.keys(items);
+            allKeys.forEach(key => {
+                chrome.browserAction.setIcon({tabId: parseInt(key), path: 'images/locked.png'});
+            })
+        });
+    }
 });
 
 
