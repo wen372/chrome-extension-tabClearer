@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
             chrome.tabs.get(parseInt(key), function (tab) {
               chrome.windows.getCurrent(function (window) {
                 var option = document.createElement("option");
-                option.text = tab.url;
+                option.text = tab.title.substring(0,21) + " :  " + tab.url;
                 option.value = tab.id;
                 /* This is to distinguish to users the locked tabs in the current window */
                 if (window.id == tab.windowId) {
