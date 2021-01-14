@@ -1,5 +1,5 @@
 body {
-    width:200px;
+    width:400px;
     height:130px;
  }
 
@@ -30,22 +30,24 @@ body {
     flex:auto;
 }
 
-.lockedPageViewHidden{
-    display: none;
-}
 
-.lockedPageView{
-    display: block;
-    width:200px;
-    height:130px;
-}
 .popup{
     display:flex;
 }
+
+.scrollArea{
+    flex: auto;
+}
+
+.mainView{
+    flex: auto;
+}
+
+
 .scrollArea select{
     width:180px;
     height:150px;
-    overflow: scroll;
+    overflow: auto;
 }
 /* width */
 .scrollArea select::-webkit-scrollbar {
