@@ -35,37 +35,45 @@ body {
     display:flex;
 }
 
-.scrollArea{
-    flex: auto;
-}
 
 .mainView{
     flex: auto;
+    padding-left:10px;
 }
 
-
-.scrollArea select{
+.scrollArea{
     width:180px;
     height:150px;
-    overflow: auto;
+    overflow:auto;
+    flex: auto;
+
 }
+.scrollArea select{
+    overflow: visible;
+    border:hidden;
+    outline:0px;
+} 
+.scrollArea select option{
+    border:0px;
+} 
+
 /* width */
-.scrollArea select::-webkit-scrollbar {
+.scrollArea::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   
 /* Track */
-.scrollArea select::-webkit-scrollbar-track {
+.scrollArea::-webkit-scrollbar-track {
 background: #f1f1f1; 
 }
    
 /* Handle */
-.scrollArea select::-webkit-scrollbar-thumb {
+.scrollArea::-webkit-scrollbar-thumb {
     background: #888; 
 }
   
 /* Handle on hover */
-.scrollArea select::-webkit-scrollbar-thumb:hover {
+.scrollArea::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
