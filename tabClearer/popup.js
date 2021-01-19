@@ -60,3 +60,6 @@ chrome.storage.local.get(null, function (items) {
     chrome.tabs.update(tabId, {selected: true}, function(){});
   })
 }, false);
+
+
+//chrome.runtime.sendMessage({command: "start"});

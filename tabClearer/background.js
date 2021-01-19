@@ -41,7 +41,19 @@ function lock() {
         dictionary[currentId] = 0;
         chrome.storage.local.set(dictionary, function () { });
         chrome.browserAction.setIcon({ tabId: tab.id, path: 'images/locked.png' });
+
+        //adds title + url to scrollArea view
+        var _popup = chrome.extension.getViews( { type: 'popup' } )[0];
+        scrollSelect = _popup.document.getElementById('scrollSelect');
+        var option = document.createElement("option");
+        option.text = tab.title.substring(0,21) + " :  " + tab.url;
+        option.value = tab.id;
+        option.style.backgroundColor = "lightgreen";
+        scrollSelect.add(option);
+        
+
     });
+
   }
   
 //"unlocks" current tab by removing from storage
@@ -50,6 +62,12 @@ function unlock() {
         var currentId = tab.id.toString();
         chrome.storage.local.remove(currentId, function () { });
         chrome.browserAction.setIcon({ tabId: tab.id, path: 'images/unlocked.png' });
+        
+        //removes title + url from scrollArea
+        var _popup = chrome.extension.getViews( { type: 'popup' } )[0];
+        scrollSelect = _popup.document.getElementById('scrollSelect');
+        scrollSelect.remove(scrollSelect.length-1);
+
     });
 }
 
@@ -87,3 +105,15 @@ chrome.commands.onCommand.addListener(function(command) {
         clearUnlockedTabs();
     }
   });
+
+
+/*
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    switch(request.command) {
+        case "start":
+            alert("working");
+    }
+  
+    return true;
+  });
+  */
