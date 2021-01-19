@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
   
-    "name": "tabClearer plugin",
+    "name": "tabClearer",
     "description": "This extension can lock specific tabs and clears non locked tabs on click",
-    "version": "1.0",
+    "version": "0.0.0.1",
 
     "commands": {
         "clear-unlocked-tabs": {
@@ -32,11 +32,6 @@
 
     "background": {
         "scripts": ["background.js"]
-    },
-
-    "content_scripts": [{
-        "js": ["visualLockUnlock.js"],
-        "matches": ["http://*/*", "https://*/*"]
-  }]
+    }
 }
   

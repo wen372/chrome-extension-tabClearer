@@ -1,17 +1,13 @@
-//listens for "iconCheck" message from visualLockUnlock to set icon for each tab
-chrome.runtime.onMessage.addListener(function(msg) 
-{
-    if(msg.iconCheck){
-    chrome.tabs.getSelected(null, function(tab) {
-        var currentTabId = tab.id.toString();
+//listens for update of tab and updates the icon if locked
+chrome.tabs.onUpdated.addListener(function(tab){
+    var currentTabId = tab.id.toString();
         chrome.storage.local.get(currentTabId,function(result){
             if (result[currentTabId] != undefined){
                 chrome.browserAction.setIcon({tabId: tab.id, path: 'images/locked.png'});
             } 
         });
-      });
-    }
 });
+
 
 
 //listens for tab closing and checks if tab is in locked storage and deletes it from storage if it is
@@ -45,7 +41,19 @@ function lock() {
         dictionary[currentId] = 0;
         chrome.storage.local.set(dictionary, function () { });
         chrome.browserAction.setIcon({ tabId: tab.id, path: 'images/locked.png' });
+
+        //adds title + url to scrollArea view
+        var _popup = chrome.extension.getViews( { type: 'popup' } )[0];
+        scrollSelect = _popup.document.getElementById('scrollSelect');
+        var option = document.createElement("option");
+        option.text = tab.title.substring(0,21) + " :  " + tab.url;
+        option.value = tab.id;
+        option.style.backgroundColor = "lightgreen";
+        scrollSelect.add(option);
+        
+
     });
+
   }
   
 //"unlocks" current tab by removing from storage
@@ -54,6 +62,12 @@ function unlock() {
         var currentId = tab.id.toString();
         chrome.storage.local.remove(currentId, function () { });
         chrome.browserAction.setIcon({ tabId: tab.id, path: 'images/unlocked.png' });
+        
+        //removes title + url from scrollArea
+        var _popup = chrome.extension.getViews( { type: 'popup' } )[0];
+        scrollSelect = _popup.document.getElementById('scrollSelect');
+        scrollSelect.remove(scrollSelect.length-1);
+
     });
 }
 
@@ -91,3 +105,15 @@ chrome.commands.onCommand.addListener(function(command) {
         clearUnlockedTabs();
     }
   });
+
+
+/*
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    switch(request.command) {
+        case "start":
+            alert("working");
+    }
+  
+    return true;
+  });
+  */
