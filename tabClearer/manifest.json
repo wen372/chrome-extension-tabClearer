@@ -32,11 +32,6 @@
 
     "background": {
         "scripts": ["background.js"]
-    },
-
-    "content_scripts": [{
-        "js": ["visualLockUnlock.js"],
-        "matches": ["http://*/*", "https://*/*"]
-  }]
+    }
 }
   
