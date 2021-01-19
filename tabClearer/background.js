@@ -49,7 +49,7 @@ function lock() {
         option.text = tab.title.substring(0,21) + " :  " + tab.url;
         option.value = tab.id;
         option.style.backgroundColor = "lightgreen";
-        scrollSelect.add(option);
+        scrollSelect.append(option);
         
 
     });
@@ -66,8 +66,11 @@ function unlock() {
         //removes title + url from scrollArea
         var _popup = chrome.extension.getViews( { type: 'popup' } )[0];
         scrollSelect = _popup.document.getElementById('scrollSelect');
-        scrollSelect.remove(scrollSelect.length-1);
-
+        for (i=0;i<scrollSelect.options.length;i++){
+            if(scrollSelect.options[i].value == currentId){
+                scrollSelect.options[i] = null;
+            }
+        }
     });
 }
 
